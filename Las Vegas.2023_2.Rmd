@@ -1,0 +1,44 @@
+---
+title: "Las Vegas Trip (Gomi & Toto)"
+output: 
+  html_document:
+    df_print: paged
+    code_folding: "hide"
+  pdf_document: default
+runtime: shiny
+---
+
+# Interactive Las Vegas Trip Itinerary
+
+### Date: `r shiny::textInput("date_input", "Enter Date Range", value = "12/14/2023 ~ 12/28/2023")`
+
+### Location: `r shiny::textInput("location_input", "Enter Location", value = "태성이형네 주소")`
+
+`r shiny::uiOutput("itinerary")`
+
+### Itinerary Details
+
+**Day 1: `r shiny::textOutput("day1_date")` - Welcome Day**
+
+-   `r shiny::textInput("day1_activity1", "Activity 1", value = "토토 할러데이 파티 끝나고 출발")`
+-   `r shiny::textInput("day1_activity2", "Activity 2", value = "밤에 도착")`
+
+<!-- Include similar sections for each day -->
+
+### Editable Sections
+
+- Modify activities and times as per your convenience.
+- Click 'Update Itinerary' to see changes.
+
+### Actions
+
+`r shiny::actionButton("update_itinerary", "Update Itinerary")`
+
+`r shiny::observeEvent(input$update_itinerary, {
+  output$day1_date <- renderText({ input$date_input })
+  output$itinerary <- renderUI({
+    # Update other itinerary details based on user input
+  })
+})`
+
+<!-- You can add similar observeEvent functions for each day or specific activities -->
